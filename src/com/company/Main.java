@@ -13,6 +13,7 @@ public class Main {
         Spot tabDrinkSpot[];
         Spot tabCashierSpot[];
         ArrayList <Person> tabOfPersons[];
+        int value;
 
         //simulation total time
         int howManyIterations = 5400;
@@ -43,20 +44,25 @@ public class Main {
             if (morePersons == 1) {
 
                 //State of the next group of persons?
-                double inicialState = rn.nextDouble() % 1;
+                double inicialState;
 
                 //How Many?
                 double howManyPersons = rn.nextDouble() % 1;
 
-                if (inicialState >= 0.2) {
-                    actualState = 0;
-                } else if (inicialState >= 0.05 && inicialState < 0.2){
-                    actualState = 1;
-                } else{
-                    actualState = 2;
-                }
-
                 if (howManyPersons >= 0.5) {
+
+                    //State of the next group of persons?
+                    inicialState = rn.nextDouble() % 1;
+
+                    if (inicialState >= 0.2) {
+                        actualState = 0;
+                    } else if (inicialState >= 0.05 && inicialState < 0.2){
+                        actualState = 1;
+                    } else{
+                        actualState = 2;
+                    }
+
+
                     if(actualState == 0) {
                         tabHotFoodSpot[0].addPersonToQueue();
                     } else if(actualState == 1) {
@@ -64,47 +70,82 @@ public class Main {
                     } else if(actualState == 2) {
                         tabDrinkSpot[0].addPersonToQueue();
                     }
+
                 } else if (howManyPersons >= 0.2 && howManyPersons < 0.5) {
-                    if(actualState == 0) {
-                        tabHotFoodSpot[0].addPersonToQueue();
-                        tabHotFoodSpot[0].addPersonToQueue();
-                    } else if(actualState == 1) {
-                        tabSandSpot[0].addPersonToQueue();
-                        tabSandSpot[0].addPersonToQueue();
-                    } else if(actualState == 2) {
-                        tabDrinkSpot[0].addPersonToQueue();
-                        tabDrinkSpot[0].addPersonToQueue();
+
+                    for (int j = 0; j < 2; j++) {
+
+                        //State of the next group of persons?
+                        inicialState = rn.nextDouble() % 1;
+
+                        if (inicialState >= 0.2) {
+                            actualState = 0;
+                        } else if (inicialState >= 0.05 && inicialState < 0.2) {
+                            actualState = 1;
+                        } else {
+                            actualState = 2;
+                        }
+
+
+                        if (actualState == 0) {
+                            tabHotFoodSpot[j].addPersonToQueue();
+                        } else if (actualState == 1) {
+                            tabSandSpot[j].addPersonToQueue();
+
+                        } else if (actualState == 2) {
+                            tabDrinkSpot[j].addPersonToQueue();
+
+                        }
                     }
+
                 } else if (howManyPersons >= 0.1 && howManyPersons < 0.2) {
-                    if(actualState == 0) {
-                        tabHotFoodSpot[0].addPersonToQueue();
-                        tabHotFoodSpot[0].addPersonToQueue();
-                        tabHotFoodSpot[0].addPersonToQueue();
-                    } else if(actualState == 1) {
-                        tabSandSpot[0].addPersonToQueue();
-                        tabSandSpot[0].addPersonToQueue();
-                        tabSandSpot[0].addPersonToQueue();
-                    } else if(actualState == 2) {
-                        tabDrinkSpot[0].addPersonToQueue();
-                        tabDrinkSpot[0].addPersonToQueue();
-                        tabDrinkSpot[0].addPersonToQueue();
+
+                    for(int j = 0; j < 3; j++) {
+
+                        //State of the next group of persons?
+                        inicialState = rn.nextDouble() % 1;
+
+                        if (inicialState >= 0.2) {
+                            actualState = 0;
+                        } else if (inicialState >= 0.05 && inicialState < 0.2){
+                            actualState = 1;
+                        } else{
+                            actualState = 2;
+                        }
+
+
+                        if (actualState == 0) {
+                            tabHotFoodSpot[j].addPersonToQueue();
+                        } else if (actualState == 1) {
+                            tabSandSpot[j].addPersonToQueue();
+                        } else if (actualState == 2) {
+                            tabDrinkSpot[j].addPersonToQueue();
+                        }
                     }
                 } else {
-                    if(actualState == 0) {
-                        tabHotFoodSpot[0].addPersonToQueue();
-                        tabHotFoodSpot[0].addPersonToQueue();
-                        tabHotFoodSpot[0].addPersonToQueue();
-                        tabHotFoodSpot[0].addPersonToQueue();
-                    } else if(actualState == 1) {
-                        tabSandSpot[0].addPersonToQueue();
-                        tabSandSpot[0].addPersonToQueue();
-                        tabSandSpot[0].addPersonToQueue();
-                        tabSandSpot[0].addPersonToQueue();
-                    } else if(actualState == 2) {
-                        tabDrinkSpot[0].addPersonToQueue();
-                        tabDrinkSpot[0].addPersonToQueue();
-                        tabDrinkSpot[0].addPersonToQueue();
-                        tabDrinkSpot[0].addPersonToQueue();
+                    for (int j = 4; j < 4; j++) {
+
+                        //State of the next group of persons?
+                        inicialState = rn.nextDouble() % 1;
+
+                        if (inicialState >= 0.2) {
+                            actualState = 0;
+                        } else if (inicialState >= 0.05 && inicialState < 0.2){
+                            actualState = 1;
+                        } else{
+                            actualState = 2;
+                        }
+
+
+                        if (actualState == 0) {
+                            tabHotFoodSpot[j].addPersonToQueue();
+
+                        } else if (actualState == 1) {
+                            tabSandSpot[j].addPersonToQueue();
+
+                        } else if (actualState == 2) {
+                            tabDrinkSpot[j].addPersonToQueue();
+                        }
                     }
                 }
             }

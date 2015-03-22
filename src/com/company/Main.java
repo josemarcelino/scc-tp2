@@ -19,9 +19,17 @@ public class Main {
 
         // Each spot and queue size
         tabHotFoodSpot = new Spot[1];
+        tabHotFoodSpot[0] = new Spot(0);
+
         tabSandSpot = new Spot[1];
+        tabSandSpot[0] = new Spot(0);
+
         tabDrinkSpot = new Spot[1];
+        tabDrinkSpot[0] = new Spot(0);
+
         tabCashierSpot = new Spot[2];
+        tabCashierSpot[0] = new Spot(0);
+        tabCashierSpot[1] = new Spot(1);
 
         int morePersons = 0;
         int actualState = 0;
@@ -98,6 +106,27 @@ public class Main {
                     }
                 }
             }
+
+            if(!tabHotFoodSpot[0].getSpotQueueOfPersons().isEmpty()){
+
+            }
+
+            if(!tabSandSpot[0].getSpotQueueOfPersons().isEmpty()){
+
+            }
+
+            if(!tabDrinkSpot[0].getSpotQueueOfPersons().isEmpty()){
+
+            }
+
+            if(!tabCashierSpot[0].getSpotQueueOfPersons().isEmpty()){
+
+            }
+
+            if(!tabCashierSpot[0].getSpotQueueOfPersons().isEmpty()){
+
+            }
+
 
 
         }

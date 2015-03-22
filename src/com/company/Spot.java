@@ -24,6 +24,36 @@ public class Spot {
     // How many iterations until this person is over?
     double howManyUntilNext;
 
+    public Spot(int actualSpot) {
+        this.actualSpot = actualSpot;
+        SpotQueueOfPersons = new ArrayList<Person>();
+        //Hot Food spot
+        if (actualSpot == 0) {
+            this.maximumDuringTime = 120.0;
+            this.minimumDuringTime = 50.0;
+            this.maximumAccumulationTime = 20.0;
+            this.minimumAccumulationTime = 40.0;
+        }
+        //Speciality Sandwiches spot
+        else if (actualSpot == 1) {
+            this.maximumDuringTime = 180.0;
+            this.minimumDuringTime = 60.0;
+            this.maximumAccumulationTime = 5.0;
+            this.minimumAccumulationTime = 15.0;
+        }
+        //Drink spot
+        else if (actualSpot == 2) {
+            this.maximumDuringTime = 20.0;
+            this.minimumDuringTime = 5.0;
+            this.maximumAccumulationTime = 10.0;
+            this.minimumAccumulationTime = 5.0;
+        }
+        //Cashier spot
+        else {
+
+        }
+    }
+
     // Calculate how much time this client will waste
     double duringTime(){
         Random rn = new Random();

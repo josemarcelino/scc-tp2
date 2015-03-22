@@ -106,7 +106,7 @@ class Average {
 
 class Tally {
     final private List<Double> values;
-    public Tally() {values = new ArrayList<>();}
+    public Tally() {values = new ArrayList<Double>();}
     public double mean() {
         double sum = 0.0;
         for (Double value: values) sum += value;
@@ -163,7 +163,7 @@ abstract class Model {
 final class EventList {
     protected final PriorityQueue<Event> eventList;
     public EventList() {
-        this.eventList = new PriorityQueue<>(10);
+        this.eventList = new PriorityQueue<Event>(10);
     }
     public boolean empty() {return eventList.isEmpty();}
     public void clear() {eventList.clear();}

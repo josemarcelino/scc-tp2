@@ -30,6 +30,8 @@ public class Statistics {
     List<Double> type1timeWastedAtCachier[];
 
 
+
+
     public void setPeopleAtCachier(List<Double>[] peopleAtCachier) {
         this.peopleAtCachier = peopleAtCachier;
     }
@@ -100,6 +102,10 @@ public class Statistics {
 
     public void setType3timeWastedAtHotFood(List<Double>[] type3timeWastedAtHotFood) {
         this.type3timeWastedAtHotFood = type3timeWastedAtHotFood;
+    }
+
+    public void addValue(Double newPeopleInTheSystem){
+        peopleInTheSystem.add(newPeopleInTheSystem);
     }
 
     public List<Double> getPeopleInTheSystem() {

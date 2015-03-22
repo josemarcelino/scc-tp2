@@ -17,6 +17,7 @@ public class Simulator {
     ArrayList<Person> tabOfPersons;
     int value;
     Person actualPerson;
+    int count = 0 ;
 
     public int compareQueues(Spot tab[], int size) {
         int index = 0;
@@ -62,6 +63,8 @@ public class Simulator {
         int cashierSpotNum = tabCashierSpot.length;
 
         Exponential exponential = new Exponential((int)new Date().getTime(),30);
+        count = (int)exponential.next();
+
 
 
         //Simulation
@@ -169,8 +172,9 @@ public class Simulator {
 
             morePersons = 0;
 
-            if(rn.nextInt()%100 < exponential.next() && howManyIterations%30 == 0){
+            if(count == 0 && howManyIterations%30 == 0){
                 morePersons = 1;
+                count = (int)exponential.next();
             }
 
 
@@ -186,9 +190,12 @@ public class Simulator {
                 System.out.println("Desde que Entrou " + n.getTotalTime());
                 System.out.println();
             }
-            List<Double> aux = stats.getPeopleInTheSystem();
-            aux.add(howManyPersonInTheSystem);
-            stats.setPeopleInTheSystem(aux);
+            //List<Double> aux = stats.getPeopleInTheSystem();
+            //aux.add(howManyPersonInTheSystem);
+            //stats.setPeopleInTheSystem(aux);
+            //stats.addValue(howManyPersonInTheSystem);
+            count--;
+
 
 
         }

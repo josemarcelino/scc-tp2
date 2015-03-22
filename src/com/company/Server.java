@@ -116,7 +116,7 @@ class Server extends Model {
         super();
         this.queue = new Accumulate(0);
         this.rest = new Accumulate(n);
-        this.line = new ArrayList<>();
+        this.line = new ArrayList<Token>();
         this.delayTime = new Average();
         double[] A = new double[]{0.4, 1.2, 0.5, 1.7, 0.2, 1.6, 0.2, 1.4, 1.9, 2.7, 0.5};
         double[] S = new double[]{2.0, 0.7, 0.2, 1.1, 3.7, 0.6, 0.9, 1.3, 1.1, 1.8, 0.8};

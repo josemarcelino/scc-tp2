@@ -207,6 +207,65 @@ public class Simulator {
 
         }
 
+        //Acabar os restantes clientes
+        while(!tabHotFoodSpot[0].getSpotQueueOfPersons().isEmpty() || !tabCashierSpot[0].getSpotQueueOfPersons().isEmpty() || !tabSandSpot[0].getSpotQueueOfPersons().isEmpty() || !tabDrinkSpot[0].getSpotQueueOfPersons().isEmpty()|| !tabCashierSpot[1].getSpotQueueOfPersons().isEmpty()) {
+            actualPerson = tabHotFoodSpot[0].run();
+            if (actualPerson != null) {
+                index = tabOfPersons.indexOf(actualPerson);
+                actualPerson.setActualSpot(actualPerson.getActualSpot() - 2);
+                tabOfPersons.set(index, actualPerson);
+                biggerQueue = compareQueues(tabDrinkSpot, drinkSpotNum);
+                tabDrinkSpot[biggerQueue].addPersonToQueue(actualPerson);
+            }
+
+            actualPerson = tabSandSpot[0].run();
+            if (actualPerson != null) {
+                index = tabOfPersons.indexOf(actualPerson);
+                actualPerson.setActualSpot(actualPerson.getActualSpot() - 1);
+                tabOfPersons.set(index, actualPerson);
+                biggerQueue = compareQueues(tabDrinkSpot, drinkSpotNum);
+                tabDrinkSpot[biggerQueue].addPersonToQueue(actualPerson);
+            }
+
+            actualPerson = tabDrinkSpot[0].run();
+            if (actualPerson != null) {
+                index = tabOfPersons.indexOf(actualPerson);
+                actualPerson.setActualSpot(actualPerson.getActualSpot() - 1);
+                tabOfPersons.set(index, actualPerson);
+                biggerQueue = compareQueues(tabCashierSpot, cashierSpotNum);
+                tabCashierSpot[biggerQueue].addPersonToQueue(actualPerson);
+            }
+
+            actualPerson = tabCashierSpot[0].run();
+            if (actualPerson != null) {
+                tabOfPersons.get(tabOfPersons.indexOf(actualPerson)).setActualSpot(-1);
+            }
+
+            actualPerson = tabCashierSpot[1].run();
+            if (actualPerson != null) {
+                tabOfPersons.get(tabOfPersons.indexOf(actualPerson)).setActualSpot(-1);
+            }
+
+            howManyPersonInTheSystem = 0;
+            for (Person n : tabOfPersons) {
+                if (n.getActualSpot() >= 0) {
+                    howManyPersonInTheSystem++;
+                }
+
+
+          /*      System.out.println("Pessoa Numero " + tabOfPersons.indexOf(n));
+                System.out.println("Esta no Spot " + n.getActualSpot());
+                System.out.println("Desde que Entrou " + n.getTotalTime());
+                System.out.println(); */
+            }
+
+            if(howManyPersonInTheSystem > maxPeopleInTheSystem)
+                maxPeopleInTheSystem = howManyPersonInTheSystem;
+            System.out.println("Estão neste momento estas pessoas no sistema: " + howManyPersonInTheSystem);
+            stats.addValueToNewPeopleInTheSystemList(howManyPersonInTheSystem);
+
+        }
+
 
 
         System.out.println("Max people in the system : " + maxPeopleInTheSystem);

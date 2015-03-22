@@ -111,104 +111,6 @@ public class Main {
                     }
                 }
 
-
-                 /*   //State of the next group of persons?
-                    inicialState = rn.nextDouble() % 1;
-
-                    if (inicialState >= 0.2) {
-                        actualState = 0;
-                    } else if (inicialState >= 0.05 && inicialState < 0.2){
-                        actualState = 1;
-                    } else{
-                        actualState = 2;
-                    }
-
-
-                    if(actualState == 0) {
-                        tabHotFoodSpot[0].addPersonToQueue();
-                    } else if(actualState == 1) {
-                        tabSandSpot[0].addPersonToQueue();
-                    } else if(actualState == 2) {
-                        tabDrinkSpot[0].addPersonToQueue();
-                    }
-
-                } else if (howManyPersons >= 0.2 && howManyPersons < 0.5) {
-
-                    for (int j = 0; j < 2; j++) {
-
-                        //State of the next group of persons?
-                        inicialState = rn.nextDouble() % 1;
-
-                        if (inicialState >= 0.2) {
-                            actualState = 0;
-                        } else if (inicialState >= 0.05 && inicialState < 0.2) {
-                            actualState = 1;
-                        } else {
-                            actualState = 2;
-                        }
-
-
-                        if (actualState == 0) {
-                            tabHotFoodSpot[j].addPersonToQueue();
-                        } else if (actualState == 1) {
-                            tabSandSpot[j].addPersonToQueue();
-
-                        } else if (actualState == 2) {
-                            tabDrinkSpot[j].addPersonToQueue();
-
-                        }
-                    }
-
-                } else if (howManyPersons >= 0.1 && howManyPersons < 0.2) {
-
-                    for(int j = 0; j < 3; j++) {
-
-                        //State of the next group of persons?
-                        inicialState = rn.nextDouble() % 1;
-
-                        if (inicialState >= 0.2) {
-                            actualState = 0;
-                        } else if (inicialState >= 0.05 && inicialState < 0.2){
-                            actualState = 1;
-                        } else{
-                            actualState = 2;
-                        }
-
-
-                        if (actualState == 0) {
-                            tabHotFoodSpot[j].addPersonToQueue();
-                        } else if (actualState == 1) {
-                            tabSandSpot[j].addPersonToQueue();
-                        } else if (actualState == 2) {
-                            tabDrinkSpot[j].addPersonToQueue();
-                        }
-                    }
-                } else {
-                    for (int j = 4; j < 4; j++) {
-
-                        //State of the next group of persons?
-                        inicialState = rn.nextDouble() % 1;
-
-                        if (inicialState >= 0.2) {
-                            actualState = 0;
-                        } else if (inicialState >= 0.05 && inicialState < 0.2){
-                            actualState = 1;
-                        } else{
-                            actualState = 2;
-                        }
-
-
-                        if (actualState == 0) {
-                            tabHotFoodSpot[j].addPersonToQueue();
-
-                        } else if (actualState == 1) {
-                            tabSandSpot[j].addPersonToQueue();
-
-                        } else if (actualState == 2) {
-                            tabDrinkSpot[j].addPersonToQueue();
-                        }
-                    }
-                } */
             }
 
             if(!tabHotFoodSpot[0].getSpotQueueOfPersons().isEmpty()){
@@ -246,10 +148,8 @@ public class Main {
         }
 
 
-
+        System.out.println("Finish . . .");
 
         }
-
-        System.out.println("Finish . . .");
     }
 

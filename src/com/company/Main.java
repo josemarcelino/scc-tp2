@@ -15,6 +15,8 @@ public class Main {
         ArrayList <Person> tabOfPersons[];
         int value;
 
+        Person actualPerson;
+
         //simulation total time
         int howManyIterations = 5400;
         Random rn = new Random();
@@ -151,15 +153,27 @@ public class Main {
             }
 
             if(!tabHotFoodSpot[0].getSpotQueueOfPersons().isEmpty()){
-                tabHotFoodSpot[0].run();
+                actualPerson = tabHotFoodSpot[0].run();
+                if(actualPerson != null){
+                    actualPerson.setActualSpot(actualPerson.getActualSpot() - 1);
+                    tabSandSpot[0].addPersonToQueue(actualPerson);
+                }
             }
 
             if(!tabSandSpot[0].getSpotQueueOfPersons().isEmpty()){
-                tabSandSpot[0].run();
+                actualPerson = tabSandSpot[0].run();
+                if(actualPerson != null){
+                    actualPerson.setActualSpot(actualPerson.getActualSpot() - 1);
+                    tabDrinkSpot[0].addPersonToQueue(actualPerson);
+                }
             }
 
             if(!tabDrinkSpot[0].getSpotQueueOfPersons().isEmpty()){
-                tabDrinkSpot[0].run();
+                actualPerson = tabDrinkSpot[0].run();
+                if(actualPerson != null){
+                    actualPerson.setActualSpot(actualPerson.getActualSpot() - 1);
+                    tabCashierSpot[0].addPersonToQueue(actualPerson);
+                }
             }
 
             if(!tabCashierSpot[0].getSpotQueueOfPersons().isEmpty()){
@@ -169,6 +183,9 @@ public class Main {
             if(!tabCashierSpot[1].getSpotQueueOfPersons().isEmpty()){
                 tabCashierSpot[1].run();
             }
+
+        }
+
 
 
 

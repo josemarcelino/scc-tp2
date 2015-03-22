@@ -10,7 +10,7 @@ public class Spot {
     // actualSpotTyoe
     int actualSpot;
 
-    Person ActualPerson;
+    Person actualPerson;
 
     //Max/Min each person wastes on this station
     double maximumDuringTime;
@@ -69,17 +69,38 @@ public class Spot {
         return (minimumAccumulationTime + i);
     }
 
-    void run(){
-        if(!this.SpotQueueOfPersons.isEmpty()){
-            if(){
+    Person run(){
+        if(!SpotQueueOfPersons.isEmpty()){
+            if(actualPerson == null){
+                actualPerson = SpotQueueOfPersons.get(0);
 
+                double timeToAccumulate = actualPerson.getAccumulationTime();
+                timeToAccumulate = timeToAccumulate + accumulationTime();
+                actualPerson.setAccumulationTime(timeToAccumulate);
+
+                double timeToStay = duringTime();
+                actualPerson.setIdleTime(timeToStay);
+
+                SpotQueueOfPersons.remove(actualPerson);
+            }
+
+            double timeToWait = actualPerson.getIdleTime();
+            actualPerson.setIdleTime(timeToWait - 1);
+            if(getActualPerson().getIdleTime() == 0 && actualSpot != 0){
+                return actualPerson;
+            }
+            else if(actualSpot == 0) {
+                actualPerson = null;
             }
         }
-        System.out.println("Done");
+        return null;
+    }
+
+    private void returnPersonToAnotherSpot(Person actualPerson, int i) {
     }
 
     public Person getActualPerson() {
-        return ActualPerson;
+        return actualPerson;
     }
 
     public int getActualSpot() {
@@ -106,10 +127,6 @@ public class Spot {
         return SpotQueueOfPersons;
     }
 
-    public double getHowManyUntilNext() {
-        return howManyUntilNext;
-    }
-
     public void setMaximumAccumulationTime(double maximumAccumulationTime) {
         this.maximumAccumulationTime = maximumAccumulationTime;
     }
@@ -134,11 +151,11 @@ public class Spot {
         this.actualSpot = actualSpot;
     }
 
-    public void addPersonToQueue() {
-        SpotQueueOfPersons.add(new Person());
+    public void addPersonToQueue(Person actualPerson) {
+        SpotQueueOfPersons.add(actualPerson);
     }
 
     public void setActualPerson(Person actualPerson) {
-        ActualPerson = actualPerson;
+        actualPerson = actualPerson;
     }
 }

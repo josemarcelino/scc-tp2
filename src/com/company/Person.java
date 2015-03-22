@@ -10,9 +10,9 @@ public class Person {
     // Time this person will waste on this Spot
     double idleTime;
     //Actual Spot
-    double actualSpot;
+    int actualSpot;
 
-    public double getActualSpot() {
+    public int getActualSpot() {
         return actualSpot;
     }
 
@@ -32,7 +32,7 @@ public class Person {
         this.idleTime = idleTime;
     }
 
-    public void setActualSpot(double actualSpot) {
+    public void setActualSpot(int actualSpot) {
         this.actualSpot = actualSpot;
     }
 }

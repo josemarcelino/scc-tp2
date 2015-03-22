@@ -6,6 +6,16 @@ import java.util.Random;
 
 public class Main {
 
+
+    public static int compareQueues(Spot tab[], int size) {
+        int index = 0;
+        for(int i = 1; i < size; i++) {
+            if (tab[i].getSpotQueueOfPersons().size() > tab[i - 1].getSpotQueueOfPersons().size())
+                index = i;
+        }
+        return(index);
+    }
+
     public static void main(String[] args) throws FileNotFoundException {
 
         Spot tabHotFoodSpot[];
@@ -14,6 +24,11 @@ public class Main {
         Spot tabCashierSpot[];
         ArrayList <Person> tabOfPersons[];
         int value;
+        int hotFoodNum = 1;
+        int sandSpotNum = 1;
+        int drinkSpotNum = 1;
+        int cashierSpotNum = 2;
+
 
         Person actualPerson;
 
@@ -38,6 +53,7 @@ public class Main {
 
         int morePersons = 0;
         int actualState = 0;
+        int biggerQueue;
 
         //Simulation
         for(int i = 0; i < howManyIterations; i++) {
@@ -52,8 +68,48 @@ public class Main {
                 double howManyPersons = rn.nextDouble() % 1;
 
                 if (howManyPersons >= 0.5) {
+                    value = 1;
+                }
+                else if (howManyPersons >= 0.2 && howManyPersons < 0.5) {
+                    value = 2;
+                }
+                else if (howManyPersons >= 0.1 && howManyPersons < 0.2) {
+                    value = 3;
+                }else {
+                    value = 4;
+                }
 
-                    //State of the next group of persons?
+                for(int j = 0; j < value; j++) {
+                    inicialState = rn.nextDouble() % 1;
+
+                    if (inicialState >= 0.2) {
+                        actualState = 0;
+                    } else if (inicialState >= 0.05 && inicialState < 0.2){
+                        actualState = 1;
+                    } else{
+                        actualState = 2;
+                    }
+
+                    if(actualState == 0) {
+                        Person newPerson = new Person();
+                        newPerson.setActualSpot(actualState);
+                        biggerQueue = compareQueues(tabHotFoodSpot,hotFoodNum);
+                        tabHotFoodSpot[biggerQueue].addPersonToQueue(newPerson);
+                    } else if(actualState == 1) {
+                        Person newPerson = new Person();
+                        newPerson.setActualSpot(actualState);
+                        biggerQueue = compareQueues(tabSandSpot,sandSpotNum);
+                        tabSandSpot[biggerQueue].addPersonToQueue(newPerson);
+                    } else if(actualState == 2) {
+                        Person newPerson = new Person();
+                        newPerson.setActualSpot(actualState);
+                        biggerQueue = compareQueues(tabDrinkSpot,drinkSpotNum);
+                        tabDrinkSpot[biggerQueue].addPersonToQueue(newPerson);
+                    }
+                }
+
+
+                 /*   //State of the next group of persons?
                     inicialState = rn.nextDouble() % 1;
 
                     if (inicialState >= 0.2) {
@@ -149,7 +205,7 @@ public class Main {
                             tabDrinkSpot[j].addPersonToQueue();
                         }
                     }
-                }
+                } */
             }
 
             if(!tabHotFoodSpot[0].getSpotQueueOfPersons().isEmpty()){
@@ -193,4 +249,4 @@ public class Main {
 
         System.out.println("Finish . . .");
     }
-}
+

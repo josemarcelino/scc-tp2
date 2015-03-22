@@ -10,6 +10,8 @@ public class Spot {
     // actualSpotTyoe
     int actualSpot;
 
+    Person ActualPerson;
+
     //Max/Min each person wastes on this station
     double maximumDuringTime;
     double minimumDuringTime;
@@ -20,9 +22,6 @@ public class Spot {
 
     //Queue of persons at this station
     ArrayList <Person> SpotQueueOfPersons;
-
-    // How many iterations until this person is over?
-    double howManyUntilNext;
 
     public Spot(int actualSpot) {
         this.actualSpot = actualSpot;
@@ -71,7 +70,16 @@ public class Spot {
     }
 
     void run(){
+        if(!this.SpotQueueOfPersons.isEmpty()){
+            if(){
+
+            }
+        }
         System.out.println("Done");
+    }
+
+    public Person getActualPerson() {
+        return ActualPerson;
     }
 
     public int getActualSpot() {
@@ -122,15 +130,15 @@ public class Spot {
         SpotQueueOfPersons = spotQueueOfPersons;
     }
 
-    public void setHowManyUntilNext(double howManyUntilNext) {
-        this.howManyUntilNext = howManyUntilNext;
-    }
-
     public void setActualSpot(int actualSpot) {
         this.actualSpot = actualSpot;
     }
 
     public void addPersonToQueue() {
         SpotQueueOfPersons.add(new Person());
+    }
+
+    public void setActualPerson(Person actualPerson) {
+        ActualPerson = actualPerson;
     }
 }

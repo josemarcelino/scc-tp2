@@ -24,14 +24,14 @@ public class Main {
         tabHotFoodSpot[0] = new Spot(0);
 
         tabSandSpot = new Spot[1];
-        tabSandSpot[0] = new Spot(0);
+        tabSandSpot[0] = new Spot(1);
 
         tabDrinkSpot = new Spot[1];
-        tabDrinkSpot[0] = new Spot(0);
+        tabDrinkSpot[0] = new Spot(2);
 
         tabCashierSpot = new Spot[2];
-        tabCashierSpot[0] = new Spot(0);
-        tabCashierSpot[1] = new Spot(1);
+        tabCashierSpot[0] = new Spot(3);
+        tabCashierSpot[1] = new Spot(3);
 
         int morePersons = 0;
         int actualState = 0;
@@ -125,7 +125,7 @@ public class Main {
                 tabCashierSpot[0].run();
             }
 
-            if(!tabCashierSpot[0].getSpotQueueOfPersons().isEmpty()){
+            if(!tabCashierSpot[1].getSpotQueueOfPersons().isEmpty()){
                 tabCashierSpot[1].run();
             }
 

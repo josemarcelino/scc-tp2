@@ -24,10 +24,7 @@ public class Main {
         Spot tabCashierSpot[];
         ArrayList <Person> tabOfPersons[];
         int value;
-        int hotFoodNum = 1;
-        int sandSpotNum = 1;
-        int drinkSpotNum = 1;
-        int cashierSpotNum = 2;
+
 
 
         Person actualPerson;
@@ -54,6 +51,12 @@ public class Main {
         int morePersons = 0;
         int actualState = 0;
         int biggerQueue;
+
+        int hotFoodNum = tabHotFoodSpot.length;
+        int sandSpotNum = tabSandSpot.length;
+        int drinkSpotNum = tabDrinkSpot.length;
+        int cashierSpotNum = tabCashierSpot.length;
+
 
         //Simulation
         for(int i = 0; i < howManyIterations; i++) {

@@ -20,19 +20,23 @@ public class Simulator {
     double maxPeopleInSand;
     double maxPeopleInDrinks;
     double maxPeopleInCashier;
+    double maxDelayHot;
+    double maxDelaySand;
+    double maxDelayCashier;
+    double maxDelayDrink;
 
     ArrayList<Person> tabOfPersons;
     int value;
     Person actualPerson;
-    int count = 0 ;
+    int count = 0;
 
     public int compareQueues(Spot tab[], int size) {
         int index = 0;
-        for(int i = 1; i < size; i++) {
+        for (int i = 1; i < size; i++) {
             if (tab[i].getSpotQueueOfPersons().size() > tab[i - 1].getSpotQueueOfPersons().size())
                 index = i;
         }
-        return(index);
+        return (index);
     }
 
     void run() {
@@ -42,6 +46,11 @@ public class Simulator {
         maxPeopleInDrinks = 0;
         maxPeopleInHot = 0;
         maxPeopleInSand = 0;
+
+        maxDelayHot = 0;
+        maxDelayCashier = 0;
+        maxDelayDrink = 0;
+        maxDelaySand = 0;
 
         stats = new Statistics();
         tabOfPersons = new ArrayList<Person>();
@@ -79,9 +88,8 @@ public class Simulator {
         int drinkSpotNum = tabDrinkSpot.length;
         int cashierSpotNum = tabCashierSpot.length;
 
-        Exponential exponential = new Exponential((int)new Date().getTime(),30);
-        count = (int)exponential.next();
-
+        Exponential exponential = new Exponential((int) new Date().getTime(), 30);
+        count = (int) exponential.next();
 
 
         //Simulation
@@ -127,6 +135,7 @@ public class Simulator {
                         biggerQueue = compareQueues(tabHotFoodSpot, hotFoodNum);
                         tabHotFoodSpot[biggerQueue].addPersonToQueue(newPerson);
                         tabOfPersons.add(newPerson);
+                        stats.getTimeWastedAtHotFood().add(newPerson.getIdleTime());
 
                     } else if (actualState == 2) {
                         newPerson = new Person();
@@ -135,6 +144,7 @@ public class Simulator {
                         biggerQueue = compareQueues(tabSandSpot, sandSpotNum);
                         tabSandSpot[biggerQueue].addPersonToQueue(newPerson);
                         tabOfPersons.add(newPerson);
+                        stats.getTimeWastedAtSand().add(newPerson.getIdleTime());
 
                     } else if (actualState == 1) {
                         newPerson = new Person();
@@ -143,55 +153,61 @@ public class Simulator {
                         biggerQueue = compareQueues(tabDrinkSpot, drinkSpotNum);
                         tabDrinkSpot[biggerQueue].addPersonToQueue(newPerson);
                         tabOfPersons.add(newPerson);
+                        stats.getTimeWastedAtDrink().add(newPerson.idleTime);
 
                     }
                 }
 
             }
 
-                actualPerson = tabHotFoodSpot[0].run();
-                if (actualPerson != null) {
-                    index = tabOfPersons.indexOf(actualPerson);
-                    actualPerson.setActualSpot(actualPerson.getActualSpot() - 2);
-                    tabOfPersons.set(index, actualPerson);
-                    biggerQueue = compareQueues(tabDrinkSpot, drinkSpotNum);
-                    tabDrinkSpot[biggerQueue].addPersonToQueue(actualPerson);
-                }
+            actualPerson = tabHotFoodSpot[0].run();
+            if (actualPerson != null) {
+                index = tabOfPersons.indexOf(actualPerson);
+                actualPerson.setActualSpot(actualPerson.getActualSpot() - 2);
+                tabOfPersons.set(index, actualPerson);
+                biggerQueue = compareQueues(tabDrinkSpot, drinkSpotNum);
+                tabDrinkSpot[biggerQueue].addPersonToQueue(actualPerson);
+                stats.getTimeWastedAtDrink().add(actualPerson.getIdleTime());
+            }
 
-                actualPerson = tabSandSpot[0].run();
-                if (actualPerson != null) {
-                    index = tabOfPersons.indexOf(actualPerson);
-                    actualPerson.setActualSpot(actualPerson.getActualSpot() - 1);
-                    tabOfPersons.set(index, actualPerson);
-                    biggerQueue = compareQueues(tabDrinkSpot, drinkSpotNum);
-                    tabDrinkSpot[biggerQueue].addPersonToQueue(actualPerson);
-                }
+            actualPerson = tabSandSpot[0].run();
+            if (actualPerson != null) {
+                index = tabOfPersons.indexOf(actualPerson);
+                actualPerson.setActualSpot(actualPerson.getActualSpot() - 1);
+                tabOfPersons.set(index, actualPerson);
+                biggerQueue = compareQueues(tabDrinkSpot, drinkSpotNum);
+                tabDrinkSpot[biggerQueue].addPersonToQueue(actualPerson);
+                stats.getTimeWastedAtDrink().add(actualPerson.getIdleTime());
+            }
 
-                actualPerson = tabDrinkSpot[0].run();
-                if (actualPerson != null) {
-                    index = tabOfPersons.indexOf(actualPerson);
-                    actualPerson.setActualSpot(actualPerson.getActualSpot() - 1);
-                    tabOfPersons.set(index, actualPerson);
-                    biggerQueue = compareQueues(tabCashierSpot, cashierSpotNum);
-                    tabCashierSpot[biggerQueue].addPersonToQueue(actualPerson);
-                }
+            actualPerson = tabDrinkSpot[0].run();
+            if (actualPerson != null) {
+                index = tabOfPersons.indexOf(actualPerson);
+                actualPerson.setActualSpot(actualPerson.getActualSpot() - 1);
+                tabOfPersons.set(index, actualPerson);
+                biggerQueue = compareQueues(tabCashierSpot, cashierSpotNum);
+                tabCashierSpot[biggerQueue].addPersonToQueue(actualPerson);
+                stats.getPeopleAtCachier().add(actualPerson.getIdleTime());
+            }
 
-                actualPerson = tabCashierSpot[0].run();
-                if (actualPerson != null) {
-                tabOfPersons.get(tabOfPersons.indexOf(actualPerson)).setActualSpot(-1);
-                 }
-
-               actualPerson = tabCashierSpot[1].run();
+            actualPerson = tabCashierSpot[0].run();
             if (actualPerson != null) {
                 tabOfPersons.get(tabOfPersons.indexOf(actualPerson)).setActualSpot(-1);
+
+            }
+
+            actualPerson = tabCashierSpot[1].run();
+            if (actualPerson != null) {
+                tabOfPersons.get(tabOfPersons.indexOf(actualPerson)).setActualSpot(-1);
+
             }
 
 
             morePersons = 0;
 
-            if(count <= 0 ){
+            if (count <= 0) {
                 morePersons = 1;
-                count = (int)exponential.next();
+                count = (int) exponential.next();
             }
 
 
@@ -200,20 +216,28 @@ public class Simulator {
             howManyPersonInDrinks = 0;
             howManyPersonInHot = 0;
             howManyPersonInSand = 0;
-            for(Person n : tabOfPersons) {
+            for (Person n : tabOfPersons) {
                 if (n.getActualSpot() >= 0) {
                     howManyPersonInTheSystem++;
                 }
-                if (n.getActualSpot() == 3)
+                if (n.getActualSpot() == 3) {
                     howManyPersonInHot++;
-                else if(n.getActualSpot() == 2)
+                    if (n.getIdleTime() > maxDelayHot) {
+                        maxDelayHot = n.getIdleTime();
+                    }
+                } else if (n.getActualSpot() == 2) {
                     howManyPersonInSand++;
-                else if(n.getActualSpot() == 1){
+                    if (n.getIdleTime() > maxDelaySand)
+                        maxDelaySand = n.getIdleTime();
+                } else if (n.getActualSpot() == 1) {
                     howManyPersonInDrinks++;
-                }
-                else if(n.getActualSpot() == 0)
+                    if (n.getIdleTime() > maxDelayDrink)
+                        maxDelayDrink = n.getIdleTime();
+                } else if (n.getActualSpot() == 0) {
                     howManyPersonInCashier++;
-
+                    if (n.getIdleTime() > maxDelayCashier)
+                        maxDelayCashier = n.getIdleTime();
+                }
 
 
                 System.out.println("Pessoa Numero " + tabOfPersons.indexOf(n));
@@ -224,15 +248,15 @@ public class Simulator {
             //List<Double> aux = stats.getPeopleInTheSystem();
             //aux.add(howManyPersonInTheSystem);
             //stats.setPeopleInTheSystem(aux);
-            if(howManyPersonInTheSystem > maxPeopleInTheSystem)
+            if (howManyPersonInTheSystem > maxPeopleInTheSystem)
                 maxPeopleInTheSystem = howManyPersonInTheSystem;
-            if(howManyPersonInHot > maxPeopleInHot)
+            if (howManyPersonInHot > maxPeopleInHot)
                 maxPeopleInHot = howManyPersonInHot;
-            if(howManyPersonInSand > maxPeopleInSand)
+            if (howManyPersonInSand > maxPeopleInSand)
                 maxPeopleInSand = howManyPersonInSand;
-            if(howManyPersonInDrinks > maxPeopleInDrinks)
+            if (howManyPersonInDrinks > maxPeopleInDrinks)
                 maxPeopleInDrinks = howManyPersonInDrinks;
-            if(howManyPersonInCashier > maxPeopleInCashier)
+            if (howManyPersonInCashier > maxPeopleInCashier)
                 maxPeopleInCashier = howManyPersonInCashier;
             System.out.println("Estão neste momento estas pessoas no sistema: " + howManyPersonInTheSystem);
             System.out.println("Estão neste momento estas pessoas no sistema: " + howManyPersonInTheSystem);
@@ -250,11 +274,10 @@ public class Simulator {
             //System.out.println("COUNT ::: " + count);
 
 
-
         }
 
         //Acabar os restantes clientes
-        while(!tabHotFoodSpot[0].getSpotQueueOfPersons().isEmpty() || !tabCashierSpot[0].getSpotQueueOfPersons().isEmpty() || !tabSandSpot[0].getSpotQueueOfPersons().isEmpty() || !tabDrinkSpot[0].getSpotQueueOfPersons().isEmpty()|| !tabCashierSpot[1].getSpotQueueOfPersons().isEmpty()) {
+        while (!tabHotFoodSpot[0].getSpotQueueOfPersons().isEmpty() || !tabCashierSpot[0].getSpotQueueOfPersons().isEmpty() || !tabSandSpot[0].getSpotQueueOfPersons().isEmpty() || !tabDrinkSpot[0].getSpotQueueOfPersons().isEmpty() || !tabCashierSpot[1].getSpotQueueOfPersons().isEmpty()) {
             actualPerson = tabHotFoodSpot[0].run();
             if (actualPerson != null) {
                 index = tabOfPersons.indexOf(actualPerson);
@@ -262,6 +285,7 @@ public class Simulator {
                 tabOfPersons.set(index, actualPerson);
                 biggerQueue = compareQueues(tabDrinkSpot, drinkSpotNum);
                 tabDrinkSpot[biggerQueue].addPersonToQueue(actualPerson);
+                stats.getTimeWastedAtDrink().add(actualPerson.getIdleTime());
             }
 
             actualPerson = tabSandSpot[0].run();
@@ -271,6 +295,7 @@ public class Simulator {
                 tabOfPersons.set(index, actualPerson);
                 biggerQueue = compareQueues(tabDrinkSpot, drinkSpotNum);
                 tabDrinkSpot[biggerQueue].addPersonToQueue(actualPerson);
+                stats.getTimeWastedAtDrink().add(actualPerson.getIdleTime());
             }
 
             actualPerson = tabDrinkSpot[0].run();
@@ -280,16 +305,19 @@ public class Simulator {
                 tabOfPersons.set(index, actualPerson);
                 biggerQueue = compareQueues(tabCashierSpot, cashierSpotNum);
                 tabCashierSpot[biggerQueue].addPersonToQueue(actualPerson);
+                stats.getPeopleAtCachier().add(actualPerson.getIdleTime());
             }
 
             actualPerson = tabCashierSpot[0].run();
             if (actualPerson != null) {
                 tabOfPersons.get(tabOfPersons.indexOf(actualPerson)).setActualSpot(-1);
+
             }
 
             actualPerson = tabCashierSpot[1].run();
             if (actualPerson != null) {
                 tabOfPersons.get(tabOfPersons.indexOf(actualPerson)).setActualSpot(-1);
+
             }
 
             howManyPersonInTheSystem = 0;
@@ -297,57 +325,67 @@ public class Simulator {
             howManyPersonInDrinks = 0;
             howManyPersonInHot = 0;
             howManyPersonInSand = 0;
-            for(Person n : tabOfPersons) {
+
+
+            for (Person n : tabOfPersons) {
                 if (n.getActualSpot() >= 0) {
                     howManyPersonInTheSystem++;
                 }
-                if (n.getActualSpot() == 3)
+                if (n.getActualSpot() == 3) {
                     howManyPersonInHot++;
-                else if(n.getActualSpot() == 2)
+                    if (n.getIdleTime() > maxDelayHot) {
+                        maxDelayHot = n.getIdleTime();
+                    }
+                } else if (n.getActualSpot() == 2) {
                     howManyPersonInSand++;
-                else if(n.getActualSpot() == 1){
+                    if (n.getIdleTime() > maxDelaySand)
+                        maxDelaySand = n.getIdleTime();
+                } else if (n.getActualSpot() == 1) {
                     howManyPersonInDrinks++;
-                }
-                else if(n.getActualSpot() == 0)
+                    if (n.getIdleTime() > maxDelayDrink)
+                        maxDelayDrink = n.getIdleTime();
+                } else if (n.getActualSpot() == 0) {
                     howManyPersonInCashier++;
-
-
-          /*      System.out.println("Pessoa Numero " + tabOfPersons.indexOf(n));
-                System.out.println("Esta no Spot " + n.getActualSpot());
-                System.out.println("Desde que Entrou " + n.getTotalTime());
-                System.out.println(); */
+                    if (n.getIdleTime() > maxDelayCashier)
+                        maxDelayCashier = n.getIdleTime();
+                }
             }
 
-            if(howManyPersonInTheSystem > maxPeopleInTheSystem)
-                maxPeopleInTheSystem = howManyPersonInTheSystem;
-            if(howManyPersonInHot > maxPeopleInHot)
-                maxPeopleInHot = howManyPersonInHot;
-            if(howManyPersonInSand > maxPeopleInSand)
-                maxPeopleInSand = howManyPersonInSand;
-            if(howManyPersonInDrinks > maxPeopleInDrinks)
-                maxPeopleInDrinks = howManyPersonInDrinks;
-            if(howManyPersonInCashier > maxPeopleInCashier)
-                maxPeopleInCashier = howManyPersonInCashier;
-            System.out.println("Estão neste momento estas pessoas no sistema: " + howManyPersonInTheSystem);
-            System.out.println("Estão neste momento estas pessoas nos Hot Food: " + howManyPersonInHot);
-            System.out.println("Estão neste momento estas pessoas nas Sandwi: " + howManyPersonInSand);
-            System.out.println("Estão neste momento estas pessoas nas Bebidas: " + howManyPersonInDrinks);
-            System.out.println("Estão neste momento estas pessoas para pagar: " + howManyPersonInCashier);
-            stats.addValueToNewPeopleInTheSystemList(howManyPersonInTheSystem);
-            stats.addValueToPeopleInCashier(howManyPersonInCashier);
-            stats.addValueToPeopleInDrink(howManyPersonInDrinks);
-            stats.addValueToPeopleInHot(howManyPersonInHot);
-            stats.addValueToPeopleInSand(howManyPersonInSand);
+
+                System.out.println("Estão neste momento estas pessoas no sistema: " + howManyPersonInTheSystem);
+                System.out.println("Estão neste momento estas pessoas nos Hot Food: " + howManyPersonInHot);
+                System.out.println("Estão neste momento estas pessoas nas Sandwi: " + howManyPersonInSand);
+                System.out.println("Estão neste momento estas pessoas nas Bebidas: " + howManyPersonInDrinks);
+                System.out.println("Estão neste momento estas pessoas para pagar: " + howManyPersonInCashier);
+                stats.addValueToNewPeopleInTheSystemList(howManyPersonInTheSystem);
+                stats.addValueToPeopleInCashier(howManyPersonInCashier);
+                stats.addValueToPeopleInDrink(howManyPersonInDrinks);
+                stats.addValueToPeopleInHot(howManyPersonInHot);
+                stats.addValueToPeopleInSand(howManyPersonInSand);
 
 
+            }
+
+
+            System.out.println("Max people in the system : " + maxPeopleInTheSystem);
+            System.out.println("Average Delay in system:  " + stats.averageTotalWait());
+            System.out.println("Max people in hot:   " + maxPeopleInHot);
+            System.out.println("Max Delay in  hot:   " + maxDelayHot);
+            System.out.println("Average in hot:      " + stats.averageHot()) ;
+            System.out.println("Max people in sand:   " + maxPeopleInSand);
+            System.out.println("Max Delay in  sand:   " + maxDelaySand);
+            System.out.println("Average in sand:      " + stats.averageSand()) ;
+            System.out.println("Max people in drinks:   " + maxPeopleInDrinks);
+            System.out.println("Max Delay in  drinks:   " + maxDelayDrink);
+            System.out.println("Average in Drinks:      " + stats.averageDrinks()) ;
+            System.out.println("Max people in Cashier:   " + maxPeopleInCashier);
+            System.out.println("Max Delay in  Cashier:   " + maxDelayCashier);
+            System.out.println("Average in Cashier:      " + stats.averageCachier()) ;
+
+            System.out.println("Finish . . .");
         }
-
-
-
-        System.out.println("Max people in the system : " + maxPeopleInTheSystem);
-        System.out.println("Finish . . .");
     }
-}
+
 
 interface RandomStream {
     abstract public double next();
@@ -371,3 +409,4 @@ class Exponential extends Uniform01 {
     @Override
     public double next() {return -mean * Math.log(super.next());}
 }
+

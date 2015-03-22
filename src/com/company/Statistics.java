@@ -217,6 +217,44 @@ public class Statistics {
     public List<Double> getType3timeWastedAtHotFood() {
         return type3timeWastedAtHotFood;
     }
+
+    public double averageHot(){
+        double sum = 0.0;
+        for(int i = 0; i < this.timeWastedAtHotFood.size();i++){
+            sum += this.timeWastedAtHotFood.get(i);
+        }
+        return(sum/this.timeWastedAtHotFood.size());
+    }
+
+    public double averageSand(){
+        double sum = 0.0;
+        for(int i = 0; i < this.timeWastedAtSand.size();i++){
+            sum += this.timeWastedAtSand.get(i);
+        }
+        return(sum/this.timeWastedAtSand.size());
+    }
+
+
+    public double averageDrinks(){
+        double sum = 0.0;
+        for(int i = 0; i < this.timeWastedAtDrink.size();i++){
+            sum += this.timeWastedAtDrink.get(i);
+        }
+        return(sum/this.timeWastedAtDrink.size());
+    }
+
+
+    public double averageCachier(){
+        double sum = 0.0;
+        for(int i = 0; i < this.timeWastedAtCachier.size();i++){
+            sum += this.timeWastedAtCachier.get(i);
+        }
+        return(sum/this.timeWastedAtCachier.size());
+    }
+
+    public double averageTotalWait(){
+        return((averageCachier() + averageDrinks() + averageHot() + averageSand())/4);
+    }
 }
 
 

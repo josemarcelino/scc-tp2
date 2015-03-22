@@ -14,6 +14,8 @@ public class Simulator {
     Spot tabDrinkSpot[];
     Spot tabCashierSpot[];
     Statistics stats;
+
+    double maxPeopleInTheSystem;
     ArrayList<Person> tabOfPersons;
     int value;
     Person actualPerson;
@@ -30,6 +32,7 @@ public class Simulator {
 
     void run() {
         //simulation total time
+        maxPeopleInTheSystem = 0;
         stats = new Statistics();
         tabOfPersons = new ArrayList<Person>();
         int howManyIterations = 5400;
@@ -193,7 +196,10 @@ public class Simulator {
             //List<Double> aux = stats.getPeopleInTheSystem();
             //aux.add(howManyPersonInTheSystem);
             //stats.setPeopleInTheSystem(aux);
-            stats.addValue(howManyPersonInTheSystem);
+            if(howManyPersonInTheSystem > maxPeopleInTheSystem)
+                maxPeopleInTheSystem = howManyPersonInTheSystem;
+            System.out.println("Estão neste momento estas pessoas no sistema: " + howManyPersonInTheSystem);
+            stats.addValueToNewPeopleInTheSystemList(howManyPersonInTheSystem);
             count--;
             //System.out.println("COUNT ::: " + count);
 
@@ -203,7 +209,7 @@ public class Simulator {
 
 
 
-
+        System.out.println("Max people in the system : " + maxPeopleInTheSystem);
         System.out.println("Finish . . .");
     }
 }

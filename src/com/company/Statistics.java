@@ -126,7 +126,7 @@ public class Statistics {
         this.type3timeWastedAtHotFood = type3timeWastedAtHotFood;
     }
 
-    public void addValue(Double newPeopleInTheSystem){
+    public void addValueToNewPeopleInTheSystemList(Double newPeopleInTheSystem){
         peopleInTheSystem.add(newPeopleInTheSystem);
     }
 

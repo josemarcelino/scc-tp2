@@ -16,6 +16,11 @@ class Token {
     private double arrivalTick;
     private double serviceTick;
     private double endTick;
+    public Token(){
+        arrivalTick = 0;
+        serviceTick = 0;
+        endTick = 0;
+    }
     public Token(double arrivalTick) {this.arrivalTick = this.serviceTick = arrivalTick;}
     public double waitTime() {return serviceTick - arrivalTick;}
     public double cycleTime(double time) {return time - arrivalTick;}

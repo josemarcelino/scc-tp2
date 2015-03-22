@@ -3,7 +3,7 @@ package com.company;
 /**
  * Created by josemarcelino on 3/21/15.
  */
-public class Person extends Server {
+public class Person extends Token{
 
     // Time this person will waste at the cachier
     double accumulationTime;

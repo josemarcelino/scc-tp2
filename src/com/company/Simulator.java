@@ -28,7 +28,7 @@ public class Simulator {
         //simulation total time
 
         tabOfPersons = new ArrayList<Person>();
-        int howManyIterations = 300;
+        int howManyIterations = 5400;
         Random rn = new Random();
 
         Person newPerson;
@@ -48,22 +48,22 @@ public class Simulator {
         tabCashierSpot[1] = new Spot(0);
 
         int morePersons = 1;
-        int actualState = 0;
-        int biggerQueue = 0;
+        int actualState;
+        int biggerQueue;
 
         int hotFoodNum = tabHotFoodSpot.length;
         int sandSpotNum = tabSandSpot.length;
         int drinkSpotNum = tabDrinkSpot.length;
         int cashierSpotNum = tabCashierSpot.length;
 
-
+        Exponential exponential = new Exponential(13,30);
         //Simulation
         for (int i = 0; i < howManyIterations; i++) {
 
             double U = rn.nextDouble() % 1;
             double x = Math.log(1 - U) / 30;
 
-            Exponential exponential = new Exponential(13,30);
+
 
             // Should I generate more persons?
             if (morePersons == 1) {
@@ -145,21 +145,27 @@ public class Simulator {
 
             morePersons = 0;
 
-            if(rn.nextInt()%100 < exponential.next()){
+            if(rn.nextInt()%100 < exponential.next() && howManyIterations%30 == 0){
                 morePersons = 1;
             }
 
-            morePersons = 0; // RETIRAR AFTER TESTE
 
-            for(Person n : tabOfPersons){
+           /* for(Person n : tabOfPersons){
                 System.out.println("Pessoa Numero " + tabOfPersons.indexOf(n));
                 System.out.println("Esta no Spot " + n.getActualSpot());
                 System.out.println("Desde que Entrou " + n.getTotalTime());
                 System.out.println();
             }
-            System.out.println("-----");
+            System.out.println("-----");**/
 
         }
+        for(Person n : tabOfPersons){
+            System.out.println("Pessoa Numero " + tabOfPersons.indexOf(n));
+            System.out.println("Esta no Spot " + n.getActualSpot());
+            System.out.println("Desde que Entrou " + n.getTotalTime());
+            System.out.println();
+        }
+
 
         System.out.println("Finish . . .");
     }

@@ -6,7 +6,7 @@ import java.util.Random;
 /**
  * Created by josemarcelino on 3/21/15.
  */
-public class Spot {
+public class Spot extends Server {
     // actualSpotTyoe
     int actualSpot;
 

@@ -60,18 +60,24 @@ public class Simulator {
         Person newPerson;
 
         // Each spot and queue size
-        tabHotFoodSpot = new Spot[1];
+        tabHotFoodSpot = new Spot[1];  //mudar nas seguintes alineas
         tabHotFoodSpot[0] = new Spot(3);
+        //b-> i / ii
+        //tabHotFoodSpot[1] = new Spot(3);
 
-        tabSandSpot = new Spot[1];
+        tabSandSpot = new Spot[1]; //mudar nas seguintes alineas
         tabSandSpot[0] = new Spot(2);
+        //b) i   / iii
+        //tabSandSpot[1] = new Spot(2);
 
         tabDrinkSpot = new Spot[1];
         tabDrinkSpot[0] = new Spot(1);
 
+
         tabCashierSpot = new Spot[2];
         tabCashierSpot[0] = new Spot(0);
         tabCashierSpot[1] = new Spot(0);
+        //tabCashierSpot[2] = new Spot(0);
 
         int morePersons = 1;
         int actualState;
@@ -170,6 +176,17 @@ public class Simulator {
                 stats.getTimeWastedAtDrink().add(actualPerson.getIdleTime());
             }
 
+            //no caso de duas hot food  b-> i / ii  / c
+            /*actualPerson = tabHotFoodSpot[1].run();
+            if (actualPerson != null) {
+                index = tabOfPersons.indexOf(actualPerson);
+                actualPerson.setActualSpot(actualPerson.getActualSpot() - 2);
+                tabOfPersons.set(index, actualPerson);
+                biggerQueue = compareQueues(tabDrinkSpot, drinkSpotNum);
+                tabDrinkSpot[biggerQueue].addPersonToQueue(actualPerson);
+                stats.getTimeWastedAtDrink().add(actualPerson.getIdleTime());
+            } */
+
             actualPerson = tabSandSpot[0].run();
             if (actualPerson != null) {
                 index = tabOfPersons.indexOf(actualPerson);
@@ -179,6 +196,17 @@ public class Simulator {
                 tabDrinkSpot[biggerQueue].addPersonToQueue(actualPerson);
                 stats.getTimeWastedAtDrink().add(actualPerson.getIdleTime());
             }
+
+            //No caso de duas sandes b->i / iii / c
+            /*actualPerson = tabSandSpot[1].run();
+            if (actualPerson != null) {
+                index = tabOfPersons.indexOf(actualPerson);
+                actualPerson.setActualSpot(actualPerson.getActualSpot() - 1);
+                tabOfPersons.set(index, actualPerson);
+                biggerQueue = compareQueues(tabDrinkSpot, drinkSpotNum);
+                tabDrinkSpot[biggerQueue].addPersonToQueue(actualPerson);
+                stats.getTimeWastedAtDrink().add(actualPerson.getIdleTime());
+            }*/
 
             actualPerson = tabDrinkSpot[0].run();
             if (actualPerson != null) {
@@ -201,6 +229,14 @@ public class Simulator {
                 tabOfPersons.get(tabOfPersons.indexOf(actualPerson)).setActualSpot(-1);
 
             }
+
+            //TERCEIRO CASHIER /////
+            /*
+            actualPerson = tabCashierSpot[1].run();
+            if (actualPerson != null) {
+                tabOfPersons.get(tabOfPersons.indexOf(actualPerson)).setActualSpot(-1);
+
+            } */
 
 
             morePersons = 0;
@@ -277,6 +313,16 @@ public class Simulator {
         }
 
         //Acabar os restantes clientes
+        //a->i
+        //while (!tabHotFoodSpot[0].getSpotQueueOfPersons().isEmpty() || !tabCashierSpot[0].getSpotQueueOfPersons().isEmpty() || !tabSandSpot[0].getSpotQueueOfPersons().isEmpty() || !tabDrinkSpot[0].getSpotQueueOfPersons().isEmpty() || !tabCashierSpot[1].getSpotQueueOfPersons().isEmpty() || !tabCashierSpot[2].getSpotQueueOfPersons().isEmpty())
+        //b-> i
+       // while (!tabHotFoodSpot[0].getSpotQueueOfPersons().isEmpty() || !tabHotFoodSpot[1].getSpotQueueOfPersons().isEmpty() || !tabCashierSpot[0].getSpotQueueOfPersons().isEmpty() || !tabSandSpot[0].getSpotQueueOfPersons().isEmpty() || !tabSandSpot[1].getSpotQueueOfPersons().isEmpty()||tabDrinkSpot[0].getSpotQueueOfPersons().isEmpty() || !tabCashierSpot[1].getSpotQueueOfPersons().isEmpty())
+        //b -> ii
+        //while (!tabHotFoodSpot[0].getSpotQueueOfPersons().isEmpty() || !tabHotFoodSpot[1].getSpotQueueOfPersons().isEmpty()|| !tabCashierSpot[0].getSpotQueueOfPersons().isEmpty() || !tabSandSpot[0].getSpotQueueOfPersons().isEmpty() || !tabDrinkSpot[0].getSpotQueueOfPersons().isEmpty() || !tabCashierSpot[1].getSpotQueueOfPersons().isEmpty() || !tabCashierSpot[2].getSpotQueueOfPersons().isEmpty())
+        //b -> iii
+        // while (!tabHotFoodSpot[0].getSpotQueueOfPersons().isEmpty() || !tabCashierSpot[0].getSpotQueueOfPersons().isEmpty() || !tabSandSpot[0].getSpotQueueOfPersons().isEmpty() || tabSandSpot[1].getSpotQueueOfPersons().isEmpty()|| !tabDrinkSpot[0].getSpotQueueOfPersons().isEmpty() || !tabCashierSpot[1].getSpotQueueOfPersons().isEmpty() || !tabCashierSpot[2].getSpotQueueOfPersons().isEmpty())
+        //c)
+      //  while (!tabHotFoodSpot[0].getSpotQueueOfPersons().isEmpty() || !tabHotFoodSpot[1].getSpotQueueOfPersons().isEmpty() || !tabCashierSpot[0].getSpotQueueOfPersons().isEmpty() || !tabSandSpot[0].getSpotQueueOfPersons().isEmpty() || !tabSandSpot[1].getSpotQueueOfPersons().isEmpty() || !tabDrinkSpot[0].getSpotQueueOfPersons().isEmpty() || !tabCashierSpot[1].getSpotQueueOfPersons().isEmpty() || !tabCashierSpot[2].getSpotQueueOfPersons().isEmpty())
         while (!tabHotFoodSpot[0].getSpotQueueOfPersons().isEmpty() || !tabCashierSpot[0].getSpotQueueOfPersons().isEmpty() || !tabSandSpot[0].getSpotQueueOfPersons().isEmpty() || !tabDrinkSpot[0].getSpotQueueOfPersons().isEmpty() || !tabCashierSpot[1].getSpotQueueOfPersons().isEmpty()) {
             actualPerson = tabHotFoodSpot[0].run();
             if (actualPerson != null) {
@@ -287,6 +333,17 @@ public class Simulator {
                 tabDrinkSpot[biggerQueue].addPersonToQueue(actualPerson);
                 stats.getTimeWastedAtDrink().add(actualPerson.getIdleTime());
             }
+            //segundo hotfood b->i / ii
+            
+           /* actualPerson = tabHotFoodSpot[1].run();
+            if (actualPerson != null) {
+                index = tabOfPersons.indexOf(actualPerson);
+                actualPerson.setActualSpot(actualPerson.getActualSpot() - 2);
+                tabOfPersons.set(index, actualPerson);
+                biggerQueue = compareQueues(tabDrinkSpot, drinkSpotNum);
+                tabDrinkSpot[biggerQueue].addPersonToQueue(actualPerson);
+                stats.getTimeWastedAtDrink().add(actualPerson.getIdleTime());
+            } */
 
             actualPerson = tabSandSpot[0].run();
             if (actualPerson != null) {
@@ -297,6 +354,17 @@ public class Simulator {
                 tabDrinkSpot[biggerQueue].addPersonToQueue(actualPerson);
                 stats.getTimeWastedAtDrink().add(actualPerson.getIdleTime());
             }
+            //segundo sand. b-> i / iii
+
+           /* actualPerson = tabSandSpot[1].run();
+            if (actualPerson != null) {
+                index = tabOfPersons.indexOf(actualPerson);
+                actualPerson.setActualSpot(actualPerson.getActualSpot() - 1);
+                tabOfPersons.set(index, actualPerson);
+                biggerQueue = compareQueues(tabDrinkSpot, drinkSpotNum);
+                tabDrinkSpot[biggerQueue].addPersonToQueue(actualPerson);
+                stats.getTimeWastedAtDrink().add(actualPerson.getIdleTime());
+            } */
 
             actualPerson = tabDrinkSpot[0].run();
             if (actualPerson != null) {
@@ -319,6 +387,13 @@ public class Simulator {
                 tabOfPersons.get(tabOfPersons.indexOf(actualPerson)).setActualSpot(-1);
 
             }
+
+            ///////////TERCEIRO CASHIER //////
+            /*actualPerson = tabCashierSpot[2].run();
+            if (actualPerson != null) {
+                tabOfPersons.get(tabOfPersons.indexOf(actualPerson)).setActualSpot(-1);
+
+            } */
 
             howManyPersonInTheSystem = 0;
             howManyPersonInCashier = 0;

@@ -30,6 +30,10 @@ public class Spot extends Server {
         if (actualSpot == 3) {
             this.maximumDuringTime = 120.0;
             this.minimumDuringTime = 50.0;
+            //a-> iicom um ajudante////////////
+            //this.maximumDuringTime = 60.0;
+            //this.minimumDuringTime = 25.0;
+            ////////////////////////////////
             this.maximumAccumulationTime = 20.0;
             this.minimumAccumulationTime = 40.0;
         }
@@ -37,6 +41,9 @@ public class Spot extends Server {
         else if (actualSpot == 2) {
             this.maximumDuringTime = 180.0;
             this.minimumDuringTime = 60.0;
+            // a->iii   com um ajudante
+            //this.maximumDuringTime = 90.0;
+            //this.minimumDuringTime = 30.0;
             this.maximumAccumulationTime = 5.0;
             this.minimumAccumulationTime = 15.0;
         }

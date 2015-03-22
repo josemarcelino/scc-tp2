@@ -130,6 +130,22 @@ public class Statistics {
         peopleInTheSystem.add(newPeopleInTheSystem);
     }
 
+    public void addValueToPeopleInHot(Double peopleInHot){
+        peopleAtHotFood.add(peopleInHot);
+    }
+
+    public void addValueToPeopleInSand(Double peopleInSand){
+        peopleAtSand.add(peopleInSand);
+    }
+
+    public void addValueToPeopleInDrink(Double peopleInDrink){
+        peopleAtDrink.add(peopleInDrink);
+    }
+
+    public void addValueToPeopleInCashier(Double peopleInCashier){
+        peopleAtCachier.add(peopleInCashier);
+    }
+
     public List<Double> getPeopleInTheSystem() {
         return peopleInTheSystem;
     }

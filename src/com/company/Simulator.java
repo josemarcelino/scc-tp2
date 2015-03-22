@@ -16,6 +16,11 @@ public class Simulator {
     Statistics stats;
 
     double maxPeopleInTheSystem;
+    double maxPeopleInHot;
+    double maxPeopleInSand;
+    double maxPeopleInDrinks;
+    double maxPeopleInCashier;
+
     ArrayList<Person> tabOfPersons;
     int value;
     Person actualPerson;
@@ -33,6 +38,11 @@ public class Simulator {
     void run() {
         //simulation total time
         maxPeopleInTheSystem = 0;
+        maxPeopleInCashier = 0;
+        maxPeopleInDrinks = 0;
+        maxPeopleInHot = 0;
+        maxPeopleInSand = 0;
+
         stats = new Statistics();
         tabOfPersons = new ArrayList<Person>();
         int howManyIterations = 5400;
@@ -59,6 +69,10 @@ public class Simulator {
         int biggerQueue;
         int index;
         double howManyPersonInTheSystem;
+        double howManyPersonInHot;
+        double howManyPersonInSand;
+        double howManyPersonInDrinks;
+        double howManyPersonInCashier;
 
         int hotFoodNum = tabHotFoodSpot.length;
         int sandSpotNum = tabSandSpot.length;
@@ -182,10 +196,24 @@ public class Simulator {
 
 
             howManyPersonInTheSystem = 0;
-            for(Person n : tabOfPersons){
-                if(n.getActualSpot() >= 0){
+            howManyPersonInCashier = 0;
+            howManyPersonInDrinks = 0;
+            howManyPersonInHot = 0;
+            howManyPersonInSand = 0;
+            for(Person n : tabOfPersons) {
+                if (n.getActualSpot() >= 0) {
                     howManyPersonInTheSystem++;
                 }
+                if (n.getActualSpot() == 3)
+                    howManyPersonInHot++;
+                else if(n.getActualSpot() == 2)
+                    howManyPersonInSand++;
+                else if(n.getActualSpot() == 1){
+                    howManyPersonInDrinks++;
+                }
+                else if(n.getActualSpot() == 0)
+                    howManyPersonInCashier++;
+
 
 
                 System.out.println("Pessoa Numero " + tabOfPersons.indexOf(n));
@@ -198,8 +226,26 @@ public class Simulator {
             //stats.setPeopleInTheSystem(aux);
             if(howManyPersonInTheSystem > maxPeopleInTheSystem)
                 maxPeopleInTheSystem = howManyPersonInTheSystem;
+            if(howManyPersonInHot > maxPeopleInHot)
+                maxPeopleInHot = howManyPersonInHot;
+            if(howManyPersonInSand > maxPeopleInSand)
+                maxPeopleInSand = howManyPersonInSand;
+            if(howManyPersonInDrinks > maxPeopleInDrinks)
+                maxPeopleInDrinks = howManyPersonInDrinks;
+            if(howManyPersonInCashier > maxPeopleInCashier)
+                maxPeopleInCashier = howManyPersonInCashier;
             System.out.println("Estão neste momento estas pessoas no sistema: " + howManyPersonInTheSystem);
+            System.out.println("Estão neste momento estas pessoas no sistema: " + howManyPersonInTheSystem);
+            System.out.println("Estão neste momento estas pessoas nos Hot Food: " + howManyPersonInHot);
+            System.out.println("Estão neste momento estas pessoas nas Sandwi: " + howManyPersonInSand);
+            System.out.println("Estão neste momento estas pessoas nas Bebidas: " + howManyPersonInDrinks);
+            System.out.println("Estão neste momento estas pessoas para pagar: " + howManyPersonInCashier);
             stats.addValueToNewPeopleInTheSystemList(howManyPersonInTheSystem);
+            stats.addValueToPeopleInCashier(howManyPersonInCashier);
+            stats.addValueToPeopleInDrink(howManyPersonInDrinks);
+            stats.addValueToPeopleInHot(howManyPersonInHot);
+            stats.addValueToPeopleInSand(howManyPersonInSand);
+
             count--;
             //System.out.println("COUNT ::: " + count);
 
@@ -247,10 +293,23 @@ public class Simulator {
             }
 
             howManyPersonInTheSystem = 0;
-            for (Person n : tabOfPersons) {
+            howManyPersonInCashier = 0;
+            howManyPersonInDrinks = 0;
+            howManyPersonInHot = 0;
+            howManyPersonInSand = 0;
+            for(Person n : tabOfPersons) {
                 if (n.getActualSpot() >= 0) {
                     howManyPersonInTheSystem++;
                 }
+                if (n.getActualSpot() == 3)
+                    howManyPersonInHot++;
+                else if(n.getActualSpot() == 2)
+                    howManyPersonInSand++;
+                else if(n.getActualSpot() == 1){
+                    howManyPersonInDrinks++;
+                }
+                else if(n.getActualSpot() == 0)
+                    howManyPersonInCashier++;
 
 
           /*      System.out.println("Pessoa Numero " + tabOfPersons.indexOf(n));
@@ -261,8 +320,25 @@ public class Simulator {
 
             if(howManyPersonInTheSystem > maxPeopleInTheSystem)
                 maxPeopleInTheSystem = howManyPersonInTheSystem;
+            if(howManyPersonInHot > maxPeopleInHot)
+                maxPeopleInHot = howManyPersonInHot;
+            if(howManyPersonInSand > maxPeopleInSand)
+                maxPeopleInSand = howManyPersonInSand;
+            if(howManyPersonInDrinks > maxPeopleInDrinks)
+                maxPeopleInDrinks = howManyPersonInDrinks;
+            if(howManyPersonInCashier > maxPeopleInCashier)
+                maxPeopleInCashier = howManyPersonInCashier;
             System.out.println("Estão neste momento estas pessoas no sistema: " + howManyPersonInTheSystem);
+            System.out.println("Estão neste momento estas pessoas nos Hot Food: " + howManyPersonInHot);
+            System.out.println("Estão neste momento estas pessoas nas Sandwi: " + howManyPersonInSand);
+            System.out.println("Estão neste momento estas pessoas nas Bebidas: " + howManyPersonInDrinks);
+            System.out.println("Estão neste momento estas pessoas para pagar: " + howManyPersonInCashier);
             stats.addValueToNewPeopleInTheSystemList(howManyPersonInTheSystem);
+            stats.addValueToPeopleInCashier(howManyPersonInCashier);
+            stats.addValueToPeopleInDrink(howManyPersonInDrinks);
+            stats.addValueToPeopleInHot(howManyPersonInHot);
+            stats.addValueToPeopleInSand(howManyPersonInSand);
+
 
         }
 

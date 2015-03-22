@@ -334,7 +334,7 @@ public class Simulator {
                 stats.getTimeWastedAtDrink().add(actualPerson.getIdleTime());
             }
             //segundo hotfood b->i / ii
-            
+
            /* actualPerson = tabHotFoodSpot[1].run();
             if (actualPerson != null) {
                 index = tabOfPersons.indexOf(actualPerson);
@@ -442,20 +442,25 @@ public class Simulator {
             }
 
 
-            System.out.println("Max people in the system : " + maxPeopleInTheSystem);
-            System.out.println("Average Delay in system:  " + stats.averageTotalWait());
-            System.out.println("Max people in hot:   " + maxPeopleInHot);
-            System.out.println("Max Delay in  hot:   " + maxDelayHot);
-            System.out.println("Average in hot:      " + stats.averageHot()) ;
-            System.out.println("Max people in sand:   " + maxPeopleInSand);
-            System.out.println("Max Delay in  sand:   " + maxDelaySand);
-            System.out.println("Average in sand:      " + stats.averageSand()) ;
-            System.out.println("Max people in drinks:   " + maxPeopleInDrinks);
-            System.out.println("Max Delay in  drinks:   " + maxDelayDrink);
-            System.out.println("Average in Drinks:      " + stats.averageDrinks()) ;
-            System.out.println("Max people in Cashier:   " + maxPeopleInCashier);
-            System.out.println("Max Delay in  Cashier:   " + maxDelayCashier);
-            System.out.println("Average in Cashier:      " + stats.averageCachier()) ;
+            System.out.println("Max people in the system :     " + maxPeopleInTheSystem);
+            System.out.println("Average Delay in system:       " + stats.averageTotalWait());
+            System.out.println("Average People in system:      " + (int)stats.averageTotalPeople());
+            System.out.println("Max people in hot:             " + maxPeopleInHot);
+            System.out.println("Average people in hot:         " + (int)stats.averagePeopleHot());
+            System.out.println("Max Delay in  hot:             " + maxDelayHot);
+            System.out.println("Average in hot:                " + stats.averageHot()) ;
+            System.out.println("Max people in sand:            " + maxPeopleInSand);
+            System.out.println(" Average people in sand        " + (int)stats.averagePeopleSand());
+            System.out.println("Max Delay in  sand:            " + maxDelaySand);
+            System.out.println("Average in sand:               " + stats.averageSand()) ;
+            System.out.println("Max people in drinks:          " + maxPeopleInDrinks);
+            System.out.println("Average people in drinks:      " + (int)stats.averagePeopleDrinks());
+            System.out.println("Max Delay in  drinks:          " + maxDelayDrink);
+            System.out.println("Average in Drinks:             " + stats.averageDrinks()) ;
+            System.out.println("Max people in Cashier:         " + maxPeopleInCashier);
+            System.out.println("Average people in Cashier      " + (int)stats.averagePeopleCachier());
+            System.out.println("Max Delay in  Cashier:         " + maxDelayCashier);
+            System.out.println("Average in Cashier:            " + stats.averageCachier()) ;
 
             System.out.println("Finish . . .");
         }

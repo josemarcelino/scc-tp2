@@ -218,6 +218,44 @@ public class Statistics {
         return type3timeWastedAtHotFood;
     }
 
+    public double averagePeopleHot(){
+        double sum = 0.0;
+        for(int i = 0; i < this.peopleAtHotFood.size();i++){
+            sum += this.peopleAtHotFood.get(i);
+        }
+        return(sum/this.peopleAtHotFood.size());
+    }
+
+
+    public double averagePeopleSand(){
+        double sum = 0.0;
+        for(int i = 0; i < this.peopleAtSand.size();i++){
+            sum += this.peopleAtSand.get(i);
+        }
+        return(sum/this.peopleAtSand.size());
+    }
+
+    public double averagePeopleDrinks(){
+        double sum = 0.0;
+        for(int i = 0; i < this.peopleAtDrink.size();i++){
+            sum += this.peopleAtDrink.get(i);
+        }
+        return(sum/this.peopleAtDrink.size());
+    }
+
+
+    public double averagePeopleCachier(){
+        double sum = 0.0;
+        for(int i = 0; i < this.peopleAtCachier.size();i++){
+            sum += this.peopleAtCachier.get(i);
+        }
+        return(sum/this.peopleAtCachier.size());
+    }
+
+    public double averageTotalPeople(){
+        return((averagePeopleCachier() + averagePeopleDrinks() + averagePeopleHot() + averagePeopleSand())/4);
+    }
+
     public double averageHot(){
         double sum = 0.0;
         for(int i = 0; i < this.timeWastedAtHotFood.size();i++){

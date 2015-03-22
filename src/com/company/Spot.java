@@ -70,6 +70,10 @@ public class Spot {
         return (minimumAccumulationTime + i);
     }
 
+    void run(){
+        System.out.println("Done");
+    }
+
     public int getActualSpot() {
         return actualSpot;
     }

@@ -1,6 +1,7 @@
 package com.company;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Main {
@@ -11,6 +12,7 @@ public class Main {
         Spot tabSandSpot[];
         Spot tabDrinkSpot[];
         Spot tabCashierSpot[];
+        ArrayList <Person> tabOfPersons[];
 
         //simulation total time
         int howManyIterations = 5400;
@@ -108,23 +110,23 @@ public class Main {
             }
 
             if(!tabHotFoodSpot[0].getSpotQueueOfPersons().isEmpty()){
-
+                tabHotFoodSpot[0].run();
             }
 
             if(!tabSandSpot[0].getSpotQueueOfPersons().isEmpty()){
-
+                tabSandSpot[0].run();
             }
 
             if(!tabDrinkSpot[0].getSpotQueueOfPersons().isEmpty()){
-
+                tabDrinkSpot[0].run();
             }
 
             if(!tabCashierSpot[0].getSpotQueueOfPersons().isEmpty()){
-
+                tabCashierSpot[0].run();
             }
 
             if(!tabCashierSpot[0].getSpotQueueOfPersons().isEmpty()){
-
+                tabCashierSpot[1].run();
             }
 
 

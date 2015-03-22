@@ -99,15 +99,11 @@ public class Spot extends Server {
             actualPerson.setIdleTime(timeToWait - 1);
             System.out.println("No " + actualSpot + " faltam " + timeToWait + " segundos");
             System.out.println(actualPerson.getIdleTime());
-            if(getActualPerson().getIdleTime() == 0 && actualSpot != 0){
+            if(getActualPerson().getIdleTime() == 0){
                 Person temp = actualPerson;
                 SpotQueueOfPersons.remove(actualPerson);
                 actualPerson = null;
                 return temp;
-            }
-            else if(getActualPerson().getIdleTime() == 0 && actualSpot == 0) {
-                SpotQueueOfPersons.remove(actualPerson);
-                actualPerson = null;
             }
 
             for(Person aux :SpotQueueOfPersons){

@@ -146,6 +146,24 @@ public class Statistics {
         peopleAtCachier.add(peopleInCashier);
     }
 
+    public void addValueTotimeWastedAtHotFood(Double InHot){
+        timeWastedAtHotFood.add(InHot);
+    }
+
+    public void addValueTimeWastedSand(Double InSand){
+        timeWastedAtSand.add(InSand);
+    }
+
+    public void addValueTimeWastedDrink(Double InDrink){
+        timeWastedAtDrink.add(InDrink);
+    }
+
+    public void addValuetimeCachier(Double InCashier){
+        timeWastedAtCachier.add(InCashier);
+    }
+
+    public void addValuetoWastedSystem(Double InSystem)  {timeWastedInTheSystem.add(InSystem);}
+
     public List<Double> getPeopleInTheSystem() {
         return peopleInTheSystem;
     }

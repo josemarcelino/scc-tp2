@@ -327,6 +327,9 @@ public class Simulator {
             actualPerson = tabHotFoodSpot[0].run();
             if (actualPerson != null) {
                 index = tabOfPersons.indexOf(actualPerson);
+                actualPerson.setTotalDelay(actualPerson.getTotalDelay() + actualPerson.getDelayAtThisSpot());
+                stats.addValueToPeopleInHot(actualPerson.getDelayAtThisSpot());
+                actualPerson.setDelayAtThisSpot(0);
                 actualPerson.setActualSpot(actualPerson.getActualSpot() - 2);
                 tabOfPersons.set(index, actualPerson);
                 biggerQueue = compareQueues(tabDrinkSpot, drinkSpotNum);
@@ -348,6 +351,9 @@ public class Simulator {
             actualPerson = tabSandSpot[0].run();
             if (actualPerson != null) {
                 index = tabOfPersons.indexOf(actualPerson);
+                actualPerson.setTotalDelay(actualPerson.getTotalDelay() + actualPerson.getDelayAtThisSpot());
+                stats.addValueToPeopleInSand(actualPerson.getDelayAtThisSpot());
+                actualPerson.setDelayAtThisSpot(0);
                 actualPerson.setActualSpot(actualPerson.getActualSpot() - 1);
                 tabOfPersons.set(index, actualPerson);
                 biggerQueue = compareQueues(tabDrinkSpot, drinkSpotNum);
@@ -369,6 +375,10 @@ public class Simulator {
             actualPerson = tabDrinkSpot[0].run();
             if (actualPerson != null) {
                 index = tabOfPersons.indexOf(actualPerson);
+                actualPerson.setTotalDelay(actualPerson.getTotalDelay() + actualPerson.getDelayAtThisSpot());
+                stats.addValueToPeopleInDrink(actualPerson.getDelayAtThisSpot());
+                actualPerson.setDelayAtThisSpot(0);
+
                 actualPerson.setActualSpot(actualPerson.getActualSpot() - 1);
                 tabOfPersons.set(index, actualPerson);
                 biggerQueue = compareQueues(tabCashierSpot, cashierSpotNum);
@@ -378,12 +388,18 @@ public class Simulator {
 
             actualPerson = tabCashierSpot[0].run();
             if (actualPerson != null) {
+                actualPerson.setTotalDelay(actualPerson.getTotalDelay() + actualPerson.getDelayAtThisSpot());
+                stats.addValuetoWastedSystem(actualPerson.getTotalDelay());
+                stats.addValueToPeopleInCashier(actualPerson.getDelayAtThisSpot());
                 tabOfPersons.get(tabOfPersons.indexOf(actualPerson)).setActualSpot(-1);
 
             }
 
             actualPerson = tabCashierSpot[1].run();
             if (actualPerson != null) {
+                actualPerson.setTotalDelay(actualPerson.getTotalDelay() + actualPerson.getDelayAtThisSpot());
+                stats.addValuetoWastedSystem(actualPerson.getTotalDelay());
+                stats.addValueToPeopleInCashier(actualPerson.getDelayAtThisSpot());
                 tabOfPersons.get(tabOfPersons.indexOf(actualPerson)).setActualSpot(-1);
 
             }

@@ -108,6 +108,7 @@ public class Spot extends Server {
 
             for(Person aux :SpotQueueOfPersons){
                 aux.setTotalTime(aux.getTotalTime() + 1);
+                aux.setDelayAtThisSpot(aux.getTotalTime() + 1);
             }
         }
         return null;

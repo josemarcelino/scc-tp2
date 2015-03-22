@@ -13,8 +13,20 @@ public class Person extends Token{
     int actualSpot;
 
     int firstSpot;
+
+    double delayAtThisSpot;
+    double totalDelay;
+
     //Total Time since arrival
     double totalTime;
+
+    public double getDelayAtThisSpot() {
+        return delayAtThisSpot;
+    }
+
+    public double getTotalDelay() {
+        return totalDelay;
+    }
 
     public int getFirstSpot() {
         return firstSpot;
@@ -54,5 +66,13 @@ public class Person extends Token{
 
     public void setFirstSpot(int firstSpot) {
         this.firstSpot = firstSpot;
+    }
+
+    public void setDelayAtThisSpot(double delayAtThisSpot) {
+        this.delayAtThisSpot = delayAtThisSpot;
+    }
+
+    public void setTotalDelay(double totalDelay) {
+        this.totalDelay = totalDelay;
     }
 }

@@ -193,7 +193,7 @@ public class Simulator {
             //List<Double> aux = stats.getPeopleInTheSystem();
             //aux.add(howManyPersonInTheSystem);
             //stats.setPeopleInTheSystem(aux);
-            //stats.addValue(howManyPersonInTheSystem);
+            stats.addValue(howManyPersonInTheSystem);
             count--;
 
 

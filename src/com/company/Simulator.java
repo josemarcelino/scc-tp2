@@ -122,20 +122,23 @@ public class Simulator {
 
                 actualPerson = tabHotFoodSpot[0].run();
                 if (actualPerson != null) {
-                    actualPerson.setActualSpot(actualPerson.getActualSpot() - 1);
-                    tabDrinkSpot[0].addPersonToQueue(actualPerson);
+                    actualPerson.setActualSpot(actualPerson.getActualSpot() - 2);
+                    biggerQueue = compareQueues(tabDrinkSpot, drinkSpotNum);
+                    tabDrinkSpot[biggerQueue].addPersonToQueue(actualPerson);
                 }
 
                 actualPerson = tabSandSpot[0].run();
                 if (actualPerson != null) {
                     actualPerson.setActualSpot(actualPerson.getActualSpot() - 1);
-                    tabDrinkSpot[0].addPersonToQueue(actualPerson);
+                    biggerQueue = compareQueues(tabDrinkSpot, drinkSpotNum);
+                    tabDrinkSpot[biggerQueue].addPersonToQueue(actualPerson);
                 }
 
                 actualPerson = tabDrinkSpot[0].run();
                 if (actualPerson != null) {
                     actualPerson.setActualSpot(actualPerson.getActualSpot() - 1);
-                    tabCashierSpot[0].addPersonToQueue(actualPerson);
+                    biggerQueue = compareQueues(tabCashierSpot, cashierSpotNum);
+                    tabCashierSpot[biggerQueue].addPersonToQueue(actualPerson);
                 }
 
                 tabCashierSpot[0].run();

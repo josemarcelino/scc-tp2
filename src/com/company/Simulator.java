@@ -172,7 +172,7 @@ public class Simulator {
 
             morePersons = 0;
 
-            if(count == 0 && howManyIterations%30 == 0){
+            if(count <= 0 ){
                 morePersons = 1;
                 count = (int)exponential.next();
             }
@@ -195,6 +195,7 @@ public class Simulator {
             //stats.setPeopleInTheSystem(aux);
             stats.addValue(howManyPersonInTheSystem);
             count--;
+            //System.out.println("COUNT ::: " + count);
 
 
 

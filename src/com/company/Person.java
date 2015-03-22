@@ -3,7 +3,7 @@ package com.company;
 /**
  * Created by josemarcelino on 3/21/15.
  */
-public class Person {
+public class Person extends Server {
 
     // Time this person will waste at the cachier
     double accumulationTime;
@@ -11,6 +11,12 @@ public class Person {
     double idleTime;
     //Actual Spot
     int actualSpot;
+    //Total Time since arrival
+    double totalTime;
+
+    public double getTotalTime() {
+        return totalTime;
+    }
 
     public int getActualSpot() {
         return actualSpot;
@@ -34,5 +40,9 @@ public class Person {
 
     public void setActualSpot(int actualSpot) {
         this.actualSpot = actualSpot;
+    }
+
+    public void setTotalTime(double totalTime) {
+        this.totalTime = totalTime;
     }
 }

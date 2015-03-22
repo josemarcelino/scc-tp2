@@ -1,6 +1,8 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -11,6 +13,7 @@ public class Simulator {
     Spot tabSandSpot[];
     Spot tabDrinkSpot[];
     Spot tabCashierSpot[];
+    Statistics stats;
     ArrayList<Person> tabOfPersons;
     int value;
     Person actualPerson;
@@ -26,7 +29,7 @@ public class Simulator {
 
     void run() {
         //simulation total time
-
+        stats = new Statistics();
         tabOfPersons = new ArrayList<Person>();
         int howManyIterations = 5400;
         Random rn = new Random();
@@ -50,19 +53,22 @@ public class Simulator {
         int morePersons = 1;
         int actualState;
         int biggerQueue;
+        int index;
+        double howManyPersonInTheSystem;
 
         int hotFoodNum = tabHotFoodSpot.length;
         int sandSpotNum = tabSandSpot.length;
         int drinkSpotNum = tabDrinkSpot.length;
         int cashierSpotNum = tabCashierSpot.length;
 
-        Exponential exponential = new Exponential(13,30);
+        Exponential exponential = new Exponential((int)new Date().getTime(),30);
+
+
         //Simulation
         for (int i = 0; i < howManyIterations; i++) {
 
             double U = rn.nextDouble() % 1;
             double x = Math.log(1 - U) / 30;
-
 
 
             // Should I generate more persons?
@@ -97,6 +103,7 @@ public class Simulator {
                     if (actualState == 3) {
                         newPerson = new Person();
                         newPerson.setActualSpot(actualState);
+                        newPerson.setFirstSpot(actualState);
                         biggerQueue = compareQueues(tabHotFoodSpot, hotFoodNum);
                         tabHotFoodSpot[biggerQueue].addPersonToQueue(newPerson);
                         tabOfPersons.add(newPerson);
@@ -104,6 +111,7 @@ public class Simulator {
                     } else if (actualState == 2) {
                         newPerson = new Person();
                         newPerson.setActualSpot(actualState);
+                        newPerson.setFirstSpot(actualState);
                         biggerQueue = compareQueues(tabSandSpot, sandSpotNum);
                         tabSandSpot[biggerQueue].addPersonToQueue(newPerson);
                         tabOfPersons.add(newPerson);
@@ -111,6 +119,7 @@ public class Simulator {
                     } else if (actualState == 1) {
                         newPerson = new Person();
                         newPerson.setActualSpot(actualState);
+                        newPerson.setFirstSpot(actualState);
                         biggerQueue = compareQueues(tabDrinkSpot, drinkSpotNum);
                         tabDrinkSpot[biggerQueue].addPersonToQueue(newPerson);
                         tabOfPersons.add(newPerson);
@@ -122,28 +131,40 @@ public class Simulator {
 
                 actualPerson = tabHotFoodSpot[0].run();
                 if (actualPerson != null) {
+                    index = tabOfPersons.indexOf(actualPerson);
                     actualPerson.setActualSpot(actualPerson.getActualSpot() - 2);
+                    tabOfPersons.set(index, actualPerson);
                     biggerQueue = compareQueues(tabDrinkSpot, drinkSpotNum);
                     tabDrinkSpot[biggerQueue].addPersonToQueue(actualPerson);
                 }
 
                 actualPerson = tabSandSpot[0].run();
                 if (actualPerson != null) {
+                    index = tabOfPersons.indexOf(actualPerson);
                     actualPerson.setActualSpot(actualPerson.getActualSpot() - 1);
+                    tabOfPersons.set(index, actualPerson);
                     biggerQueue = compareQueues(tabDrinkSpot, drinkSpotNum);
                     tabDrinkSpot[biggerQueue].addPersonToQueue(actualPerson);
                 }
 
                 actualPerson = tabDrinkSpot[0].run();
                 if (actualPerson != null) {
+                    index = tabOfPersons.indexOf(actualPerson);
                     actualPerson.setActualSpot(actualPerson.getActualSpot() - 1);
+                    tabOfPersons.set(index, actualPerson);
                     biggerQueue = compareQueues(tabCashierSpot, cashierSpotNum);
                     tabCashierSpot[biggerQueue].addPersonToQueue(actualPerson);
                 }
 
-                tabCashierSpot[0].run();
+                actualPerson = tabCashierSpot[0].run();
+                if (actualPerson != null) {
+                tabOfPersons.get(tabOfPersons.indexOf(actualPerson)).setActualSpot(-1);
+                 }
 
-                tabCashierSpot[1].run();
+               actualPerson = tabCashierSpot[1].run();
+            if (actualPerson != null) {
+                tabOfPersons.get(tabOfPersons.indexOf(actualPerson)).setActualSpot(-1);
+            }
 
 
             morePersons = 0;
@@ -153,21 +174,26 @@ public class Simulator {
             }
 
 
-           /* for(Person n : tabOfPersons){
+            howManyPersonInTheSystem = 0;
+            for(Person n : tabOfPersons){
+                if(n.getActualSpot() >= 0){
+                    howManyPersonInTheSystem++;
+                }
+
+
                 System.out.println("Pessoa Numero " + tabOfPersons.indexOf(n));
                 System.out.println("Esta no Spot " + n.getActualSpot());
                 System.out.println("Desde que Entrou " + n.getTotalTime());
                 System.out.println();
             }
-            System.out.println("-----");**/
+            List<Double> aux = stats.getPeopleInTheSystem();
+            aux.add(howManyPersonInTheSystem);
+            stats.setPeopleInTheSystem(aux);
+
 
         }
-        for(Person n : tabOfPersons){
-            System.out.println("Pessoa Numero " + tabOfPersons.indexOf(n));
-            System.out.println("Esta no Spot " + n.getActualSpot());
-            System.out.println("Desde que Entrou " + n.getTotalTime());
-            System.out.println();
-        }
+
+
 
 
         System.out.println("Finish . . .");

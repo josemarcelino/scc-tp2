@@ -11,8 +11,14 @@ public class Person extends Token{
     double idleTime;
     //Actual Spot
     int actualSpot;
+
+    int firstSpot;
     //Total Time since arrival
     double totalTime;
+
+    public int getFirstSpot() {
+        return firstSpot;
+    }
 
     public double getTotalTime() {
         return totalTime;
@@ -44,5 +50,9 @@ public class Person extends Token{
 
     public void setTotalTime(double totalTime) {
         this.totalTime = totalTime;
+    }
+
+    public void setFirstSpot(int firstSpot) {
+        this.firstSpot = firstSpot;
     }
 }
